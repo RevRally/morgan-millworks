@@ -1,0 +1,17 @@
+[build]
+  publish = "site"
+  command = "npm install"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# The site is a single page; anything unrecognised shows it. No rule for
+# /api/* on purpose — the functions declare those paths themselves, and a
+# redirect here risks shadowing them. The editor probes both the /api
+# address and Netlify's built-in one, so it works either way.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
